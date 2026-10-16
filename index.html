@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>José Tomás Herrera Klarian — Portafolio Académico & Desarrollo UdeC</title>
+  
+  <!-- Google Fonts: Inter (Apple SF Pro Alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            apple: {
+              bg: '#f5f5f7',
+              card: '#ffffff',
+              text: '#1d1d1f',
+              muted: '#86868b',
+              border: '#d2d2d7',
+              blue: '#0071e3',
+              blueHover: '#0077ed',
+              blueLight: '#2997ff',
+              darkBg: '#000000',
+              darkCard: '#1d1d1f',
+              darkElevated: '#2c2c2e',
+              darkBorder: '#38383a'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilo global inspirado en Apple Human Interface Guidelines */
+    body {
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Efecto vidrio esmerilado (Frosted Glass) de macOS / iOS */
+    .apple-glass {
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    }
+
+    /* Sombras sutiles para tarjetas Bento */
+    .bento-card {
+      border-radius: 24px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+    }
+    .bento-card:hover {
+      transform: translateY(-3px);
+    }
+    html:not(.dark) .bento-card {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    }
+    html:not(.dark) .bento-card:hover {
+      box-shadow: 0 12px 32px rgba(0, 113, 227, 0.08);
+    }
+
+    /* Ocultar barra de scroll en controles segmentados móviles */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-apple-bg text-apple-text dark:bg-apple-darkBg dark:text-stone-100 font-sans selection:bg-apple-blue selection:text-white transition-colors duration-300">
+
+  <!-- ==================== NOTIFICACIÓN TIPO DYNAMIC ISLAND / APPLE PILL ==================== -->
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 transform -translate-y-12 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#1d1d1f]/95 dark:bg-white/95 text-white dark:text-[#1d1d1f] shadow-2xl border border-white/10 dark:border-black/10 apple-glass">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-apple-blueLight dark:text-apple-blue text-sm"></i>
+    <span id="toastMsg" class="text-xs sm:text-sm font-medium tracking-tight">Enlace copiado al portapapeles</span>
+  </div>
+
+  <!-- ==================== BARRA DE NAVEGACIÓN (FROSTED GLASS) ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-white/75 dark:bg-[#1d1d1f]/75 apple-glass border-b border-black/[0.08] dark:border-white/[0.08]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-14">
+        
+        <!-- Identidad minimalista -->
+        <a href="#hero" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-apple-blue flex items-center justify-center text-white font-semibold text-xs tracking-tighter shadow-sm group-hover:bg-apple-blueHover transition-colors">
+            JT
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="font-semibold text-sm tracking-tight text-apple-text dark:text-white">
+              José Tomás Herrera K.
+            </span>
+            <span class="hidden sm:inline-block text-[11px] font-medium text-apple-muted">
+              Agronomía UdeC
+            </span>
+          </div>
+        </a>
+
+        <!-- Enlaces de navegación estilo Apple -->
+        <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-apple-text/80 dark:text-white/80">
+          <a href="#ecosistema" class="hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">Resumen</a>
+          <a href="#experiencia" class="hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">Experiencia</a>
+          <a href="#proyectos" class="hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">Trabajos & Código</a>
+          <a href="#contacto" class="hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">Contacto</a>
+        </nav>
+
+        <!-- Controles de acción a la derecha -->
+        <div class="flex items-center gap-2">
+          <!-- Botón Asistente URL GitHub -->
+          <button onclick="openGhPagesModal()" title="Cómo colocar este link en el campo URL de tu GitHub" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-apple-blue hover:bg-apple-blueHover rounded-full transition-all active:scale-95 shadow-sm">
+            <i class="fa-brands fa-github text-xs"></i>
+            <span class="hidden sm:inline">Obtener URL GitHub</span>
+            <span class="sm:hidden">GitHub URL</span>
+          </button>
+
+          <!-- Botón Copiar Link -->
+          <button onclick="copyPortfolioLink()" title="Copiar enlace de este portafolio" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-apple-text dark:text-white bg-black/[0.05] dark:bg-white/[0.1] hover:bg-black/[0.1] dark:hover:bg-white/[0.15] rounded-full transition-all active:scale-95">
+            <i class="fa-solid fa-link text-[11px] text-apple-blue dark:text-apple-blueLight"></i>
+            <span class="hidden lg:inline">Copiar Link</span>
+          </button>
+
+          <!-- Selector de Tema (Claro / Oscuro) -->
+          <button id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar apariencia" class="w-8 h-8 rounded-full flex items-center justify-center text-apple-text dark:text-white hover:bg-black/[0.05] dark:hover:bg-white/[0.1] transition-colors">
+            <i id="themeIcon" class="fa-solid fa-moon text-xs"></i>
+          </button>
+
+          <!-- Botón Menú Móvil -->
+          <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Menú" class="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-apple-text dark:text-white hover:bg-black/[0.05] dark:hover:bg-white/[0.1]">
+            <i id="mobileMenuIcon" class="fa-solid fa-bars text-xs"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Menú desplegable móvil -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-black/[0.08] dark:border-white/[0.08] bg-white/95 dark:bg-[#1d1d1f]/95 apple-glass px-4 pt-3 pb-5 space-y-1.5 text-sm">
+      <a href="#ecosistema" onclick="toggleMobileMenu()" class="block px-3 py-2 font-medium text-apple-text dark:text-white rounded-xl hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Resumen & Ecosistema</a>
+      <a href="#experiencia" onclick="toggleMobileMenu()" class="block px-3 py-2 font-medium text-apple-text dark:text-white rounded-xl hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Experiencia & Prácticas</a>
+      <a href="#proyectos" onclick="toggleMobileMenu()" class="block px-3 py-2 font-medium text-apple-text dark:text-white rounded-xl hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Trabajos & Soluciones UdeC</a>
+      <a href="#contacto" onclick="toggleMobileMenu()" class="block px-3 py-2 font-medium text-apple-text dark:text-white rounded-xl hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Contacto</a>
+      <button onclick="toggleMobileMenu(); openGhPagesModal();" class="w-full text-left px-3 py-2.5 font-semibold text-apple-blue dark:text-apple-blueLight rounded-xl bg-apple-blue/10 flex items-center gap-2 mt-2">
+        <i class="fa-brands fa-github"></i> Cómo vincular al campo URL de GitHub
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION (ESTILO APPLE KEYNOTE) ==================== -->
+  <section id="hero" class="pt-28 pb-16 sm:pt-36 sm:pb-24 bg-white dark:bg-apple-darkBg border-b border-black/[0.06] dark:border-white/[0.08]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- Pill superior sobria -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-apple-bg dark:bg-apple-darkCard border border-black/[0.08] dark:border-white/[0.1] text-xs font-medium text-apple-text dark:text-stone-300 mb-6">
+        <span class="w-2 h-2 rounded-full bg-apple-blue"></span>
+        <span>Universidad de Concepción • Campus Chillán</span>
+        <span class="text-apple-muted">|</span>
+        <span class="font-mono text-[11px] text-apple-blue dark:text-apple-blueLight">he/him</span>
+      </div>
+
+      <!-- Nombre con tipografía limpia y contraste azul zafiro -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-apple-text dark:text-white leading-[1.08]">
+        José Tomás <br class="sm:hidden">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#0066cc] via-[#0071e3] to-[#2997ff]">
+          Herrera Klarian.
+        </span>
+      </h1>
+
+      <!-- Bio sincronizada con GitHub -->
+      <p class="mt-6 text-base sm:text-xl lg:text-2xl font-normal text-apple-muted max-w-3xl mx-auto leading-relaxed">
+        Estudiante de Agronomía en la <span class="text-apple-text dark:text-white font-medium">Universidad de Concepción</span>. Mis intereses están en desarrollar <span class="text-apple-text dark:text-white font-medium">herramientas y soluciones integradas aplicadas</span> a la agricultura, bioestadística y control de calidad agroindustrial.
+      </p>
+
+      <!-- Botones principales de llamada a la acción -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <a href="#proyectos" class="px-6 py-3 rounded-full text-sm font-medium text-white bg-apple-blue hover:bg-apple-blueHover shadow-sm transition-all flex items-center gap-2 active:scale-95">
+          <span>Explorar Trabajos & Soluciones</span>
+          <i class="fa-solid fa-chevron-right text-[11px]"></i>
+        </a>
+
+        <button onclick="copyToClipboard('j.t.herreraklarian@gmail.com', 'Correo copiado: j.t.herreraklarian@gmail.com')" class="px-5 py-3 rounded-full text-sm font-medium text-apple-blue dark:text-apple-blueLight bg-apple-blue/[0.08] dark:bg-apple-blueLight/[0.12] hover:bg-apple-blue/[0.14] transition-all flex items-center gap-2 active:scale-95">
+          <i class="fa-regular fa-envelope"></i>
+          <span>j.t.herreraklarian@gmail.com</span>
+        </button>
+
+        <button onclick="copyToClipboard('+56947594353', 'Teléfono copiado: +56 9 4759 4353')" class="px-5 py-3 rounded-full text-sm font-medium text-apple-text dark:text-white bg-black/[0.05] dark:bg-white/[0.1] hover:bg-black/[0.1] dark:hover:bg-white/[0.16] transition-all flex items-center gap-2 active:scale-95">
+          <i class="fa-solid fa-phone text-apple-blue dark:text-apple-blueLight text-xs"></i>
+          <span>+56 9 4759 4353</span>
+        </button>
+      </div>
+
+      <!-- Enlaces sociales sincronizados con la captura de GitHub -->
+      <div class="mt-10 pt-8 border-t border-black/[0.06] dark:border-white/[0.08] flex flex-wrap items-center justify-center gap-6 text-xs font-medium text-apple-muted">
+        <a href="tel:+56947594353" class="hover:text-apple-blue dark:hover:text-apple-blueLight flex items-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-mobile-screen-button text-sm text-apple-blue dark:text-apple-blueLight"></i>
+          <span>+56 9 4759 4353</span>
+        </a>
+        <a href="https://wa.me/56947594353" target="_blank" rel="noopener noreferrer" class="hover:text-apple-blue dark:hover:text-apple-blueLight flex items-center gap-1.5 transition-colors">
+          <i class="fa-brands fa-whatsapp text-sm text-apple-blue dark:text-apple-blueLight"></i>
+          <span>WhatsApp Directo</span>
+        </a>
+        <a href="https://www.linkedin.com/in/jtherreraklarian" target="_blank" rel="noopener noreferrer" class="hover:text-apple-blue dark:hover:text-apple-blueLight flex items-center gap-1.5 transition-colors">
+          <i class="fa-brands fa-linkedin text-sm text-apple-blue dark:text-apple-blueLight"></i>
+          <span>linkedin.com/in/jtherreraklarian</span>
+        </a>
+        <a href="https://www.reddit.com/u/Hot_Zookeepergame474" target="_blank" rel="noopener noreferrer" class="hover:text-apple-blue dark:hover:text-apple-blueLight flex items-center gap-1.5 transition-colors">
+          <i class="fa-brands fa-reddit text-sm text-apple-blue dark:text-apple-blueLight"></i>
+          <span>u/Hot_Zookeepergame474</span>
+        </a>
+        <a href="https://www.facebook.com/share/1J4rsCW7dj/" target="_blank" rel="noopener noreferrer" class="hover:text-apple-blue dark:hover:text-apple-blueLight flex items-center gap-1.5 transition-colors">
+          <i class="fa-brands fa-facebook text-sm text-apple-blue dark:text-apple-blueLight"></i>
+          <span>Perfil Facebook</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SECCIÓN BENTO GRID (ECOSISTEMA TÉCNICO & ACADÉMICO) ==================== -->
+  <section id="ecosistema" class="py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Encabezado de sección -->
+      <div class="mb-12 text-center sm:text-left">
+        <span class="text-xs font-semibold uppercase tracking-widest text-apple-blue dark:text-apple-blueLight">Ecosistema Académico & Técnico</span>
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-apple-text dark:text-white mt-1.5">
+          Ciencia agronómica. Precisión digital.
+        </h2>
+      </div>
+
+      <!-- Grilla Bento estilo Apple -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+        
+        <!-- Card 1: Formación UdeC (7 columnas) -->
+        <div class="md:col-span-7 bento-card bg-white dark:bg-apple-darkCard p-7 sm:p-8 border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="text-xs font-semibold uppercase tracking-wider text-apple-blue dark:text-apple-blueLight">Formación Universitaria</span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-medium bg-apple-bg dark:bg-apple-darkElevated text-apple-muted">Campus Chillán, Ñuble</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-apple-text dark:text-white tracking-tight">
+              Agronomía — Universidad de Concepción
+            </h3>
+            <p class="text-xs sm:text-sm text-apple-muted mt-3 leading-relaxed">
+              Enfoque cuantitativo e integrado en producción de cultivos, fisiología vegetal, edafología, fitopatología y mejoramiento genético. Integración de metodologías experimentales de campo con herramientas computacionales modernas para la toma de decisiones agrícolas.
+            </p>
+          </div>
+
+          <div class="mt-7 pt-5 border-t border-black/[0.06] dark:border-white/[0.08] grid grid-cols-3 gap-4 text-center sm:text-left">
+            <div>
+              <span class="block text-[11px] text-apple-muted">Diseño Experimental</span>
+              <span class="text-xs sm:text-sm font-semibold text-apple-text dark:text-white">DBCA & Parcelas</span>
+            </div>
+            <div>
+              <span class="block text-[11px] text-apple-muted">Especialidad</span>
+              <span class="text-xs sm:text-sm font-semibold text-apple-text dark:text-white">Cereales & Calidad</span>
+            </div>
+            <div>
+              <span class="block text-[11px] text-apple-muted">Enfoque GitHub</span>
+              <span class="text-xs sm:text-sm font-semibold text-apple-blue dark:text-apple-blueLight">Soluciones Agro</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Inglés C1 & Comunicación Científica (5 columnas) -->
+        <div class="md:col-span-5 bento-card bg-gradient-to-br from-[#0066cc] to-[#004499] text-white p-7 sm:p-8 flex flex-col justify-between shadow-lg">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-white/80">Competencia Global</span>
+              <i class="fa-solid fa-globe text-white/70 text-lg"></i>
+            </div>
+            <div class="mt-5">
+              <span class="text-4xl sm:text-5xl font-extrabold tracking-tight">C1 Advanced</span>
+              <h3 class="text-base sm:text-lg font-semibold mt-2 text-white/95">Inglés Técnico & Científico</h3>
+              <p class="text-xs sm:text-sm text-white/80 mt-2 leading-relaxed">
+                Capacidad fluida para revisión de literatura indexada (WoS / Scopus), documentación técnica de software en GitHub y colaboración internacional.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-white/90">
+            <span>Español Nativo • Inglés C1</span>
+            <span class="font-semibold">Certificado</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Stack de Software & Ciencia de Datos (6 columnas) -->
+        <div class="md:col-span-6 bento-card bg-white dark:bg-apple-darkCard p-7 sm:p-8 border border-black/[0.06] dark:border-white/[0.08]">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-2xl bg-apple-blue/10 dark:bg-apple-blueLight/15 text-apple-blue dark:text-apple-blueLight flex items-center justify-center text-base">
+              <i class="fa-solid fa-terminal"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base sm:text-lg text-apple-text dark:text-white">Software & Análisis de Datos</h3>
+              <p class="text-xs text-apple-muted">Herramientas aplicadas a trabajos e investigación UdeC</p>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs sm:text-sm">
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>R & RStudio (agricolae, tidyverse, ggplot2)</span>
+                <span class="text-apple-blue dark:text-apple-blueLight font-semibold">Avanzado</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-apple-bg dark:bg-apple-darkElevated overflow-hidden">
+                <div class="h-full bg-apple-blue rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>Python (Pandas, Automatización de Datos)</span>
+                <span class="text-apple-blue dark:text-apple-blueLight font-semibold">Intermedio</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-apple-bg dark:bg-apple-darkElevated overflow-hidden">
+                <div class="h-full bg-apple-blue rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>ImageJ / Fiji (Morfometría & Área Foliar)</span>
+                <span class="text-apple-blue dark:text-apple-blueLight font-semibold">Avanzado</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-apple-bg dark:bg-apple-darkElevated overflow-hidden">
+                <div class="h-full bg-apple-blue rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between font-medium mb-1">
+                <span>QGIS & Cartografía Agroclimática</span>
+                <span class="text-apple-blue dark:text-apple-blueLight font-semibold">Intermedio</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-apple-bg dark:bg-apple-darkElevated overflow-hidden">
+                <div class="h-full bg-apple-blue rounded-full" style="width: 72%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Laboratorio & Terreno (6 columnas) -->
+        <div class="md:col-span-6 bento-card bg-white dark:bg-apple-darkCard p-7 sm:p-8 border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-10 h-10 rounded-2xl bg-apple-blue/10 dark:bg-apple-blueLight/15 text-apple-blue dark:text-apple-blueLight flex items-center justify-center text-base">
+                <i class="fa-solid fa-flask"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-base sm:text-lg text-apple-text dark:text-white">Instrumentación & Campo</h3>
+                <p class="text-xs text-apple-muted">Protocolos bromatológicos, genéticos y edafológicos</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3.5 rounded-2xl bg-apple-bg dark:bg-apple-darkElevated/70">
+                <span class="text-xs font-semibold text-apple-blue dark:text-apple-blueLight block">Calidad de Granos</span>
+                <p class="text-xs text-apple-text dark:text-stone-200 font-medium mt-0.5">Falling Number, Gluten, Peso Hectolítrico, Zeleny.</p>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-apple-bg dark:bg-apple-darkElevated/70">
+                <span class="text-xs font-semibold text-apple-blue dark:text-apple-blueLight block">Fitomejoramiento</span>
+                <p class="text-xs text-apple-text dark:text-stone-200 font-medium mt-0.5">Emasculación manual, cruzas dirigidas y fenotipado.</p>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-apple-bg dark:bg-apple-darkElevated/70">
+                <span class="text-xs font-semibold text-apple-blue dark:text-apple-blueLight block">Fitopatología</span>
+                <p class="text-xs text-apple-text dark:text-stone-200 font-medium mt-0.5">Cámara húmeda, cultivo en medio PDA y microscopía.</p>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-apple-bg dark:bg-apple-darkElevated/70">
+                <span class="text-xs font-semibold text-apple-blue dark:text-apple-blueLight block">Suelos & Agua</span>
+                <p class="text-xs text-apple-text dark:text-stone-200 font-medium mt-0.5">Calicatas, muestreo compuesto, pH y conductividad.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EXPERIENCIA & PRÁCTICAS ==================== -->
+  <section id="experiencia" class="py-16 sm:py-24 bg-white dark:bg-apple-darkBg border-y border-black/[0.06] dark:border-white/[0.08]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="mb-12 text-center sm:text-left">
+        <span class="text-xs font-semibold uppercase tracking-widest text-apple-blue dark:text-apple-blueLight">Trayectoria en Terreno & Planta</span>
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-apple-text dark:text-white mt-1.5">
+          Experiencia en Investigación y Agroindustria.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Experiencia 1: Tresmontes Lucchetti (Destacada) -->
+        <div class="bento-card bg-apple-bg dark:bg-apple-darkCard p-7 sm:p-8 border border-apple-blue/25 dark:border-apple-blueLight/25 flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-apple-blue text-white shadow-sm">
+                Control de Calidad Agroindustrial
+              </span>
+              <span class="text-xs font-medium text-apple-muted">Planta Agroindustrial • Chillán</span>
+            </div>
+
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-apple-text dark:text-white tracking-tight">
+                  Tresmontes Lucchetti
+                </h3>
+                <p class="text-xs sm:text-sm font-semibold text-apple-blue dark:text-apple-blueLight mt-0.5">
+                  Aseguramiento y Control de Calidad en Recepción de Granos y Harinas
+                </p>
+              </div>
+              <div class="w-10 h-10 rounded-2xl bg-apple-blue/10 dark:bg-apple-blueLight/15 text-apple-blue dark:text-apple-blueLight flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-industry text-sm"></i>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-apple-muted mt-4 leading-relaxed">
+              Desempeño en laboratorio de control de calidad agroindustrial, realizando muestreo, análisis físico-químicos, bromatológicos y reológicos para la recepción, tipificación y almacenamiento de trigo y productos de molienda:
+            </p>
+
+            <ul class="mt-3.5 space-y-2 text-xs text-apple-text/90 dark:text-stone-300">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-apple-blue dark:text-apple-blueLight mt-1 text-[10px]"></i>
+                <span><strong>Análisis Reológico y Enzimático:</strong> Determinación de índice de caída (<em>Falling Number</em>), gluten húmedo, gluten seco e índice de gluten (sistema <em>Glutomatic</em>).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-apple-blue dark:text-apple-blueLight mt-1 text-[10px]"></i>
+                <span><strong>Evaluación Física de Recepción:</strong> Medición de humedad, peso hectolítrico (balanza Schopper), índice de sedimentación Zeleny, impurezas y granos dañados bajo NCh 1237.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-apple-blue dark:text-apple-blueLight mt-1 text-[10px]"></i>
+                <span><strong>Trazabilidad y Gestión de Datos:</strong> Registro digital de parámetros críticos de calidad para clasificación de lotes en planta e inocuidad alimentaria.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-5 border-t border-black/[0.06] dark:border-white/[0.08] text-[11px] font-medium text-apple-text dark:text-stone-300">
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Falling Number</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Glutomatic</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Peso Hectolítrico</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Sedimentación Zeleny</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Norma NCh 1237</span>
+          </div>
+        </div>
+
+        <!-- Experiencia 2: INIA Quilamapu -->
+        <div class="bento-card bg-apple-bg dark:bg-apple-darkCard p-7 sm:p-8 border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-apple-blue/10 text-apple-blue dark:bg-apple-blueLight/15 dark:text-apple-blueLight">
+                Fitomejoramiento Genético
+              </span>
+              <span class="text-xs font-medium text-apple-muted">Chillán, Región de Ñuble</span>
+            </div>
+
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-apple-text dark:text-white tracking-tight">
+                  INIA Quilamapu
+                </h3>
+                <p class="text-xs sm:text-sm font-semibold text-apple-blue dark:text-apple-blueLight mt-0.5">
+                  Programa de Mejoramiento Genético de Trigo
+                </p>
+              </div>
+              <div class="w-10 h-10 rounded-2xl bg-apple-blue/10 dark:bg-apple-blueLight/15 text-apple-blue dark:text-apple-blueLight flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-seedling text-sm"></i>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-apple-muted mt-4 leading-relaxed">
+              Participación en ensayos experimentales de rendimiento y fenotipado de líneas avanzadas de trigo harinero y candeal en campo y laboratorio:
+            </p>
+
+            <ul class="mt-3.5 space-y-2 text-xs text-apple-text/90 dark:text-stone-300">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-apple-blue dark:text-apple-blueLight mt-1 text-[10px]"></i>
+                <span><strong>Hibridación y Cruzas Dirigidas:</strong> Emasculación manual de espigas y polinización controlada en bloques de cruzamiento.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-apple-blue dark:text-apple-blueLight mt-1 text-[10px]"></i>
+                <span><strong>Fenotipado Fitosanitario y Agronómico:</strong> Evaluación en terreno de severidad de roya estriada y septoria, altura de planta y estados fenológicos Zadoks.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-apple-blue dark:text-apple-blueLight mt-1 text-[10px]"></i>
+                <span><strong>Post-cosecha Experimental:</strong> Trilla de parcelas experimentales, limpieza de semilla y registro de componentes de rendimiento.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-5 border-t border-black/[0.06] dark:border-white/[0.08] text-[11px] font-medium text-apple-text dark:text-stone-300">
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Hibridación Manual</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Fenotipado a Campo</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Escala Zadoks</span>
+            <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.05]">Ensayos DBCA</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SHOWCASE DE TRABAJOS UNIVERSITARIOS & HERRAMIENTAS ==================== -->
+  <section id="proyectos" class="py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Encabezado y botón para agregar -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-apple-blue dark:text-apple-blueLight">Portafolio UdeC & GitHub</span>
+          <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-apple-text dark:text-white mt-1.5">
+            Trabajos Universitarios y Soluciones Aplicadas.
+          </h2>
+          <p class="text-xs sm:text-sm text-apple-muted mt-2 max-w-2xl">
+            Repositorio de informes técnicos, herramientas programadas en R/Python, ensayos de laboratorio y proyectos de ramos cursados en la Universidad de Concepción.
+          </p>
+        </div>
+
+        <button onclick="openNewProjectModal()" class="self-start md:self-auto px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-white bg-apple-blue hover:bg-apple-blueHover shadow-sm active:scale-95 transition-all flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-plus"></i>
+          <span>Añadir Trabajo UdeC</span>
+        </button>
+      </div>
+
+      <!-- Barra de Controles (Buscador + Segmented Control estilo Apple) -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8">
+        
+        <!-- Segmented Control Pill -->
+        <div class="inline-flex items-center p-1 rounded-2xl bg-black/[0.05] dark:bg-white/[0.08] overflow-x-auto no-scrollbar text-xs">
+          <button onclick="setCategoryFilter('all')" data-category="all" class="filter-btn px-3.5 py-2 rounded-xl font-semibold transition-all bg-white dark:bg-apple-darkCard text-apple-text dark:text-white shadow-sm whitespace-nowrap">
+            Todos (<span id="count-all">0</span>)
+          </button>
+          <button onclick="setCategoryFilter('herramientas')" data-category="herramientas" class="filter-btn px-3.5 py-2 rounded-xl font-medium text-apple-muted hover:text-apple-text dark:hover:text-white transition-all whitespace-nowrap">
+            Herramientas & Código
+          </button>
+          <button onclick="setCategoryFilter('suelos-cultivos')" data-category="suelos-cultivos" class="filter-btn px-3.5 py-2 rounded-xl font-medium text-apple-muted hover:text-apple-text dark:hover:text-white transition-all whitespace-nowrap">
+            Cultivos & Suelos
+          </button>
+          <button onclick="setCategoryFilter('agroindustria')" data-category="agroindustria" class="filter-btn px-3.5 py-2 rounded-xl font-medium text-apple-muted hover:text-apple-text dark:hover:text-white transition-all whitespace-nowrap">
+            Agroindustria
+          </button>
+          <button onclick="setCategoryFilter('estadistica')" data-category="estadistica" class="filter-btn px-3.5 py-2 rounded-xl font-medium text-apple-muted hover:text-apple-text dark:hover:text-white transition-all whitespace-nowrap">
+            Estadística & SIG
+          </button>
+        </div>
+
+        <!-- Buscador minimalista -->
+        <div class="relative w-full lg:w-72">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-apple-muted text-xs"></i>
+          <input type="text" id="projectSearch" oninput="filterProjects()" placeholder="Buscar trabajo, ramo o herramienta..." 
+            class="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-2xl bg-white dark:bg-apple-darkCard border border-black/[0.08] dark:border-white/[0.1] text-apple-text dark:text-white placeholder-apple-muted focus:outline-none focus:border-apple-blue transition-colors">
+        </div>
+
+      </div>
+
+      <!-- Grilla de Tarjetas de Proyectos -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Renderizado dinámico por JS -->
+      </div>
+
+      <!-- Estado sin resultados -->
+      <div id="emptyState" class="hidden text-center py-16 bg-white dark:bg-apple-darkCard rounded-3xl border border-black/[0.05] dark:border-white/[0.08]">
+        <i class="fa-solid fa-magnifying-glass text-2xl text-apple-muted mb-3"></i>
+        <h4 class="font-semibold text-base text-apple-text dark:text-white">Sin coincidencias</h4>
+        <p class="text-xs text-apple-muted mt-1">Intenta con otro término o selecciona otra categoría arriba.</p>
+      </div>
+
+      <!-- Restaurar predeterminados -->
+      <div class="mt-10 text-center">
+        <button onclick="resetDefaultProjects()" class="text-xs text-apple-muted hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">
+          Restaurar trabajos predeterminados
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== MODAL DE DETALLE DE PROYECTO (APPLE SHEET) ==================== -->
+  <div id="projectDetailModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 apple-glass p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white dark:bg-apple-darkCard w-full max-w-2xl max-h-[90vh] rounded-3xl border border-black/[0.08] dark:border-white/[0.12] shadow-2xl flex flex-col overflow-hidden">
+      
+      <!-- Encabezado del Modal -->
+      <div class="p-6 sm:p-7 border-b border-black/[0.06] dark:border-white/[0.08] flex items-start justify-between gap-4">
+        <div>
+          <span id="modalCategory" class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-apple-blue/10 text-apple-blue dark:bg-apple-blueLight/15 dark:text-apple-blueLight"></span>
+          <h3 id="modalTitle" class="font-bold text-lg sm:text-xl text-apple-text dark:text-white mt-2.5 leading-snug"></h3>
+          <p id="modalCourse" class="text-xs font-medium text-apple-muted mt-1"></p>
+        </div>
+        <button onclick="closeProjectModal()" class="w-8 h-8 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-apple-muted hover:text-apple-text dark:hover:text-white flex items-center justify-center shrink-0 transition-colors">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Cuerpo del Modal -->
+      <div class="p-6 sm:p-7 space-y-5 overflow-y-auto text-xs sm:text-sm">
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-apple-blue dark:text-apple-blueLight mb-1.5">Objetivo</h4>
+          <p id="modalObjective" class="text-apple-text/90 dark:text-stone-300 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-apple-blue dark:text-apple-blueLight mb-1.5">Metodología y Desarrollo</h4>
+          <p id="modalMethodology" class="text-apple-text/90 dark:text-stone-300 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-apple-blue dark:text-apple-blueLight mb-1.5">Resultados y Conclusiones</h4>
+          <p id="modalResults" class="text-apple-text/90 dark:text-stone-300 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-apple-blue dark:text-apple-blueLight mb-2">Stack & Instrumentación</h4>
+          <div id="modalTools" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-apple-bg dark:bg-apple-darkElevated flex items-center justify-between text-xs">
+          <span class="text-apple-muted"><i class="fa-solid fa-building-columns mr-1.5 text-apple-blue"></i>Universidad de Concepción</span>
+          <span id="modalDate" class="font-semibold text-apple-text dark:text-white"></span>
+        </div>
+      </div>
+
+      <!-- Pie del Modal -->
+      <div class="p-4 sm:px-7 border-t border-black/[0.06] dark:border-white/[0.08] bg-apple-bg/60 dark:bg-apple-darkElevated/50 flex items-center justify-end gap-3">
+        <button onclick="copyCurrentProjectLink()" class="px-4 py-2 rounded-full text-xs font-medium text-apple-text dark:text-white bg-black/[0.06] dark:bg-white/[0.1] hover:bg-black/[0.12] flex items-center gap-1.5 transition-colors">
+          <i class="fa-regular fa-copy"></i> Copiar Citación / Enlace
+        </button>
+        <button onclick="closeProjectModal()" class="px-5 py-2 rounded-full text-xs font-medium text-white bg-apple-blue hover:bg-apple-blueHover transition-colors">
+          Listo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== MODAL PARA AÑADIR NUEVO TRABAJO UdeC ==================== -->
+  <div id="newProjectModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 apple-glass p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white dark:bg-apple-darkCard w-full max-w-xl max-h-[92vh] rounded-3xl border border-black/[0.08] dark:border-white/[0.12] shadow-2xl flex flex-col overflow-hidden">
+      
+      <div class="p-6 border-b border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between">
+        <h3 class="font-bold text-base sm:text-lg text-apple-text dark:text-white">
+          Añadir Trabajo o Herramienta al Portafolio
+        </h3>
+        <button onclick="closeNewProjectModal()" class="w-8 h-8 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-apple-muted hover:text-apple-text dark:hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <form id="newProjectForm" onsubmit="handleNewProjectSubmit(event)" class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm">
+        <div>
+          <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Título del Trabajo / Script *</label>
+          <input type="text" id="newTitle" required placeholder="Ej: Script en R para Análisis de Varianza en Trigo" 
+            class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Asignatura o Área *</label>
+            <input type="text" id="newCourse" required placeholder="Ej: Fitomejoramiento / Bioestadística" 
+              class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+          </div>
+          <div>
+            <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Categoría *</label>
+            <select id="newCategory" required class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+              <option value="herramientas">Herramientas & Código</option>
+              <option value="suelos-cultivos">Cultivos & Suelos</option>
+              <option value="agroindustria">Agroindustria & Calidad</option>
+              <option value="estadistica">Estadística & SIG</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Fecha / Semestre *</label>
+            <input type="text" id="newDate" required placeholder="Ej: Semestre 2026-2" 
+              class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+          </div>
+          <div>
+            <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Herramientas (separadas por coma)</label>
+            <input type="text" id="newTools" placeholder="RStudio, Python, ImageJ, NCh 1237" 
+              class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Resumen Ejecutivo *</label>
+          <textarea id="newDescription" rows="2" required placeholder="Breve descripción del problema abordado y la solución..." 
+            class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium text-apple-text dark:text-stone-200 mb-1">Metodología y Resultados *</label>
+          <textarea id="newMethodology" rows="2" required placeholder="Diseño experimental, scripts utilizados o pruebas aplicadas..." 
+            class="w-full px-3.5 py-2.5 rounded-xl bg-apple-bg dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white"></textarea>
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeNewProjectModal()" class="px-4 py-2 rounded-full text-xs font-medium text-apple-muted hover:text-apple-text dark:hover:text-white">
+            Cancelar
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-full text-xs font-medium text-white bg-apple-blue hover:bg-apple-blueHover shadow-sm">
+            Guardar en el Portafolio
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL ASISTENTE GITHUB PAGES (CAMPO URL) ==================== -->
+  <div id="ghPagesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 apple-glass p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white dark:bg-apple-darkCard w-full max-w-xl max-h-[92vh] rounded-3xl border border-black/[0.08] dark:border-white/[0.12] shadow-2xl flex flex-col overflow-hidden">
+      
+      <div class="p-6 border-b border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-apple-blue text-white flex items-center justify-center text-lg">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-apple-blue dark:text-apple-blueLight">Guía Rápida GitHub Pages</span>
+            <h3 class="font-bold text-base sm:text-lg text-apple-text dark:text-white">
+              Cómo colocar este link en tu perfil de GitHub
+            </h3>
+          </div>
+        </div>
+        <button onclick="closeGhPagesModal()" class="w-8 h-8 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-apple-muted hover:text-apple-text dark:hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm">
+        <p class="text-apple-muted leading-relaxed">
+          Para obtener el enlace web público y pegarlo en el campo <strong class="text-apple-text dark:text-white">URL</strong> de tu configuración de GitHub:
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex gap-3.5">
+            <span class="w-6 h-6 rounded-full bg-apple-blue text-white font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <div>
+              <h4 class="font-semibold text-apple-text dark:text-white">Crea un repositorio público en GitHub</h4>
+              <p class="text-apple-muted mt-0.5">Nómbralo <code class="px-1.5 py-0.5 rounded bg-apple-bg dark:bg-apple-darkElevated font-mono text-apple-blue dark:text-apple-blueLight">portafolio-udec</code> y márcalo como <strong>Public</strong>.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-3.5">
+            <span class="w-6 h-6 rounded-full bg-apple-blue text-white font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <div>
+              <h4 class="font-semibold text-apple-text dark:text-white">Sube este archivo como <code class="font-mono text-apple-blue dark:text-apple-blueLight">index.html</code></h4>
+              <p class="text-apple-muted mt-0.5">Pulsa <strong>Add file → Create new file</strong>, escribe <code class="px-1.5 py-0.5 rounded bg-apple-bg dark:bg-apple-darkElevated font-mono text-apple-blue dark:text-apple-blueLight">index.html</code>, pega este código y guarda (Commit).</p>
+            </div>
+          </div>
+
+          <div class="flex gap-3.5">
+            <span class="w-6 h-6 rounded-full bg-apple-blue text-white font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+            <div>
+              <h4 class="font-semibold text-apple-text dark:text-white">Activa GitHub Pages en Settings → Pages</h4>
+              <p class="text-apple-muted mt-0.5">Elige la rama <strong>main</strong> y guarda. Copia tu enlace oficial aquí abajo:</p>
+
+              <!-- Generador de URL -->
+              <div class="mt-3 p-4 rounded-2xl bg-apple-bg dark:bg-apple-darkElevated space-y-2.5">
+                <label class="block text-[11px] font-semibold uppercase tracking-wider text-apple-muted">
+                  Tu usuario de GitHub:
+                </label>
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <input type="text" id="ghUsernameInput" oninput="updateGhUrlPreview()" value="jtherreraklarian" placeholder="Tu usuario" 
+                    class="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-apple-darkCard border border-black/[0.08] dark:border-white/[0.1] text-xs font-mono text-apple-text dark:text-white focus:outline-none focus:border-apple-blue">
+                  <button type="button" onclick="copyGeneratedGhUrl()" class="px-4 py-2 rounded-xl bg-apple-blue hover:bg-apple-blueHover text-white font-medium text-xs flex items-center justify-center gap-1.5 shrink-0 transition-all">
+                    <i class="fa-regular fa-copy"></i> Copiar URL
+                  </button>
+                </div>
+                <div class="text-xs font-mono text-apple-blue dark:text-apple-blueLight break-all pt-1">
+                  <span id="ghUrlPreview">https://jtherreraklarian.github.io/portafolio-udec/</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 sm:px-6 border-t border-black/[0.06] dark:border-white/[0.08] bg-apple-bg/60 dark:bg-apple-darkElevated/50 flex justify-end">
+        <button onclick="closeGhPagesModal()" class="px-5 py-2 rounded-full text-xs font-medium text-white bg-apple-blue hover:bg-apple-blueHover">
+          Entendido
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== SECCIÓN DE CONTACTO SOBRIA ==================== -->
+  <section id="contacto" class="py-16 sm:py-24 bg-white dark:bg-apple-darkBg border-t border-black/[0.06] dark:border-white/[0.08]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bento-card bg-apple-bg dark:bg-apple-darkCard p-8 sm:p-12 border border-black/[0.06] dark:border-white/[0.08]">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-semibold uppercase tracking-widest text-apple-blue dark:text-apple-blueLight">Contacto Directo</span>
+          <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-apple-text dark:text-white mt-1.5">
+            Colaboremos en proyectos agrícolas y tecnológicos.
+          </h2>
+          <p class="text-xs sm:text-sm text-apple-muted mt-2">
+            Disponible para grupos de trabajo en la Universidad de Concepción, desarrollo de scripts de análisis de datos e iniciativas agroindustriales.
+          </p>
+        </div>
+
+        <!-- Tarjetas rápidas de contacto -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          
+          <button onclick="copyToClipboard('j.t.herreraklarian@gmail.com', 'Correo copiado al portapapeles')" class="p-4 rounded-2xl bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.06] text-left hover:border-apple-blue transition-colors group">
+            <i class="fa-regular fa-envelope text-apple-blue dark:text-apple-blueLight text-base mb-2"></i>
+            <span class="block text-[11px] text-apple-muted">Correo Público (Copiar)</span>
+            <span class="text-xs font-semibold text-apple-text dark:text-white group-hover:text-apple-blue dark:group-hover:text-apple-blueLight break-all">
+              j.t.herreraklarian@gmail.com
+            </span>
+          </button>
+
+          <button onclick="copyToClipboard('+56947594353', 'Teléfono copiado: +56 9 4759 4353')" class="p-4 rounded-2xl bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.06] text-left hover:border-apple-blue transition-colors group">
+            <i class="fa-solid fa-phone text-apple-blue dark:text-apple-blueLight text-base mb-2"></i>
+            <span class="block text-[11px] text-apple-muted">Teléfono / WhatsApp (Copiar)</span>
+            <span class="text-xs font-semibold text-apple-text dark:text-white group-hover:text-apple-blue dark:group-hover:text-apple-blueLight">
+              +56 9 4759 4353
+            </span>
+          </button>
+
+          <a href="https://www.linkedin.com/in/jtherreraklarian" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.06] text-left hover:border-apple-blue transition-colors group">
+            <i class="fa-brands fa-linkedin-in text-apple-blue dark:text-apple-blueLight text-base mb-2"></i>
+            <span class="block text-[11px] text-apple-muted">LinkedIn Profesional</span>
+            <span class="text-xs font-semibold text-apple-text dark:text-white group-hover:text-apple-blue dark:group-hover:text-apple-blueLight flex items-center gap-1">
+              in/jtherreraklarian <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </span>
+          </a>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-apple-darkElevated border border-black/[0.05] dark:border-white/[0.06] text-left">
+            <i class="fa-solid fa-location-dot text-apple-blue dark:text-apple-blueLight text-base mb-2"></i>
+            <span class="block text-[11px] text-apple-muted">Ubicación Académica</span>
+            <span class="text-xs font-semibold text-apple-text dark:text-white">
+              Campus Chillán • UdeC
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Formulario minimalista -->
+        <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4 max-w-xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-apple-text dark:text-stone-300 mb-1">Nombre</label>
+              <input type="text" id="contactName" required placeholder="Tu nombre o docente" 
+                class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-apple-text dark:text-stone-300 mb-1">Correo electrónico</label>
+              <input type="email" id="contactEmail" required placeholder="correo@udec.cl" 
+                class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-apple-text dark:text-stone-300 mb-1">Mensaje o consulta</label>
+            <textarea id="contactMessage" rows="3" required placeholder="Hola José Tomás, te escribo por el trabajo de..." 
+              class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-white dark:bg-apple-darkElevated border border-black/[0.08] dark:border-white/[0.1] focus:outline-none focus:border-apple-blue text-apple-text dark:text-white"></textarea>
+          </div>
+
+          <div class="text-center pt-2">
+            <button type="submit" class="px-8 py-3 rounded-full text-xs sm:text-sm font-medium text-white bg-apple-blue hover:bg-apple-blueHover shadow-sm active:scale-95 transition-all">
+              Enviar Mensaje
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ESTILO APPLE ==================== -->
+  <footer class="py-8 bg-apple-bg dark:bg-apple-darkBg border-t border-black/[0.06] dark:border-white/[0.08] text-xs text-apple-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        Copyright © 2026 José Tomás Herrera Klarian. Universidad de Concepción.
+      </div>
+      <div class="flex items-center gap-5">
+        <button onclick="copyPortfolioLink()" class="hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">
+          Copiar URL
+        </button>
+        <a href="#hero" class="hover:text-apple-blue dark:hover:text-apple-blueLight transition-colors">
+          Subir <i class="fa-solid fa-chevron-up ml-1 text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== LÓGICA JAVASCRIPT ==================== -->
+  <script>
+    // 1. PROYECTOS INICIALES
+    const INITIAL_PROJECTS = [
+      {
+        id: "proj-0",
+        title: "Suite de Scripts en R y Python para Automatización de Análisis Agronómicos",
+        course: "Herramientas & Soluciones Integradas",
+        category: "herramientas",
+        date: "Repositorio Activo",
+        description: "Funciones automatizadas para procesamiento rápido de ensayos en bloques (DBCA), pruebas de comparación múltiple y exportación de gráficos listos para entrega universitaria.",
+        objective: "Reducir el tiempo de procesamiento estadístico y estandarizar la visualización de datos experimentales en asignaturas de Agronomía UdeC.",
+        methodology: "Programación modular en R (tidyverse, agricolae, ggplot2) y scripts en Python para limpieza de planillas de campo e integración reproducible.",
+        results: "Generación automática de tablas ANOVA y gráficos con letras de significancia (Tukey HSD / Duncan) en segundos.",
+        tools: ["RStudio", "Python", "Git & GitHub", "agricolae", "ggplot2"]
+      },
+      {
+        id: "proj-1",
+        title: "Evaluación de Rendimiento y Componentes en Líneas Avanzadas de Trigo Candeal",
+        course: "Fitomejoramiento & Cultivos",
+        category: "suelos-cultivos",
+        date: "Ensayo Experimental",
+        description: "Análisis comparativo de genotipos de Triticum durum bajo condiciones de campo en Chillán, evaluando espigas/m², granos por espiga y peso de mil granos.",
+        objective: "Determinar diferencias estadísticas significativas de rendimiento y estabilidad fenotípica entre líneas avanzadas.",
+        methodology: "Diseño en Bloques Completos al Azar (DBCA) con 4 repeticiones, seguimiento fenológico Zadoks y cosecha ajustada al 14% de humedad.",
+        results: "Identificación de genotipos élite con superioridad estadística en peso de mil granos y tolerancia a roya estriada.",
+        tools: ["RStudio", "ANOVA", "Tukey HSD", "Fenotipado", "Cosecha Experimental"]
+      },
+      {
+        id: "proj-2",
+        title: "Control Reológico y Bromatológico de Harinas y Trigo en Recepción Industrial",
+        course: "Agroindustria & Calidad",
+        category: "agroindustria",
+        date: "Práctica Tresmontes Lucchetti",
+        description: "Protocolo técnico de aseguramiento de calidad físico-química en lotes de trigo panadero y candeal bajo estándares NCh 1237.",
+        objective: "Verificar parámetros críticos de aptitud industrial y panificable en recepción y molienda.",
+        methodology: "Determinación de actividad alfa-amilasa (Falling Number), contenido de gluten húmedo/seco (Glutomatic), peso hectolítrico y humedad.",
+        results: "Clasificación precisa de lotes según calidad semolera y panadera, garantizando trazabilidad e inocuidad en planta.",
+        tools: ["Falling Number", "Glutomatic", "Balanza Schopper", "NCh 1237", "Control de Calidad"]
+      },
+      {
+        id: "proj-3",
+        title: "Pipeline en ImageJ para Cuantificación Automatizada de Área Foliar y Severidad",
+        course: "Soluciones Aplicadas & Fitopatología",
+        category: "herramientas",
+        date: "Herramienta Digital",
+        description: "Flujo de segmentación digital de imágenes para medir porcentaje de daño foliar necrótico y morfometría de semillas sin sesgo visual.",
+        objective: "Reemplazar la estimación visual subjetiva por una medición morfométrica digital reproducible para informes de laboratorio.",
+        methodology: "Calibración espacial milimétrica, umbralización por color (HSB/RGB) en ImageJ/Fiji y procesamiento por lotes.",
+        results: "Reducción del margen de error experimental a menos del 2.5% en evaluaciones de severidad fitosanitaria.",
+        tools: ["ImageJ / Fiji", "Macros", "Morfometría", "Fitopatología"]
+      },
+      {
+        id: "proj-4",
+        title: "Modelación Espacial de Propiedades Edáficas y Erosión Mediante SIG",
+        course: "Conservación de Suelos & Geomática",
+        category: "estadistica",
+        date: "Proyecto UdeC",
+        description: "Cartografía temática de fertilidad, pendiente y riesgo de erosión en suelos agrícolas de la Región de Ñuble utilizando QGIS y R.",
+        objective: "Generar mapas de prescripción para manejo conservacionista y zonificación predial.",
+        methodology: "Muestreo georreferenciado de suelos (0-20 cm), análisis de modelos digitales de elevación (DEM) e interpolación espacial.",
+        results: "Delimitación de unidades de manejo homogéneas para optimizar dosis de enmiendas calcáreas y fertilización.",
+        tools: ["QGIS", "R Spatial", "DEM", "Edafología", "GPS"]
+      },
+      {
+        id: "proj-5",
+        title: "Diagnóstico Etiológico de Patógenos Fúngicos en Cereales y Leguminosas",
+        course: "Fitopatología Agrícola",
+        category: "suelos-cultivos",
+        date: "Informe de Laboratorio",
+        description: "Aislamiento in vitro e identificación morfológica de agentes causales de manchas foliares y pudriciones radiculares en cultivos anuales.",
+        objective: "Identificar con rigor taxonómico los patógenos presentes en muestras de campo y diseñar una estrategia de control integrado.",
+        methodology: "Cámara húmeda, siembra aséptica en medio agar papa dextrosa (PDA), montaje con azul de lactofenol y microscopía óptica a 400x.",
+        results: "Confirmación de estructuras reproductivas y formulación de manejo preventivo fenológicamente dirigido.",
+        tools: ["Microscopía 400x", "Cultivo PDA", "Taxonomía Fúngica", "Manejo Integrado"]
+      }
+    ];
+
+    const STORAGE_KEY = "udec_apple_portfolio_projects_v1";
+    let projects = [];
+    let currentCategory = "all";
+    let activeModalProjectId = null;
+
+    function loadProjects() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          projects = JSON.parse(stored);
+        } catch (e) {
+          projects = [...INITIAL_PROJECTS];
+        }
+      } else {
+        projects = [...INITIAL_PROJECTS];
+        saveProjects();
+      }
+    }
+
+    function saveProjects() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+    }
+
+    function resetDefaultProjects() {
+      projects = [...INITIAL_PROJECTS];
+      saveProjects();
+      renderProjects();
+      showToast("Trabajos predeterminados restaurados", "fa-rotate-left");
+    }
+
+    // 2. RENDERIZADO DE TARJETAS ESTILO APPLE
+    function renderProjects() {
+      const grid = document.getElementById("projectsGrid");
+      const empty = document.getElementById("emptyState");
+      const searchVal = document.getElementById("projectSearch").value.toLowerCase().trim();
+
+      const filtered = projects.filter(item => {
+        const matchesCat = (currentCategory === "all") || (item.category === currentCategory);
+        const matchesSearch = !searchVal || 
+          item.title.toLowerCase().includes(searchVal) ||
+          item.course.toLowerCase().includes(searchVal) ||
+          item.description.toLowerCase().includes(searchVal) ||
+          (item.tools && item.tools.some(t => t.toLowerCase().includes(searchVal)));
+        return matchesCat && matchesSearch;
+      });
+
+      document.getElementById("count-all").textContent = projects.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        empty.classList.remove("hidden");
+        return;
+      }
+
+      empty.classList.add("hidden");
+
+      const catLabels = {
+        'herramientas': 'Herramientas & Código',
+        'suelos-cultivos': 'Cultivos & Suelos',
+        'agroindustria': 'Agroindustria & Calidad',
+        'estadistica': 'Estadística & SIG'
+      };
+
+      grid.innerHTML = filtered.map(item => {
+        const label = catLabels[item.category] || 'Trabajo UdeC';
+        const toolPills = (item.tools || []).slice(0, 3).map(t =>
+          `<span class="px-2.5 py-0.5 text-[11px] rounded-md bg-apple-bg dark:bg-apple-darkElevated text-apple-muted font-medium">${t}</span>`
+        ).join("");
+
+        return `
+          <article onclick="openProjectModal('${item.id}')" class="bento-card cursor-pointer bg-white dark:bg-apple-darkCard p-6 sm:p-7 border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="text-[11px] font-semibold text-apple-blue dark:text-apple-blueLight uppercase tracking-wider">
+                  ${label}
+                </span>
+                <span class="text-[11px] text-apple-muted">${item.date}</span>
+              </div>
+
+              <h3 class="font-bold text-base sm:text-lg text-apple-text dark:text-white group-hover:text-apple-blue dark:group-hover:text-apple-blueLight transition-colors leading-snug">
+                ${item.title}
+              </h3>
+
+              <p class="text-xs font-medium text-apple-muted mt-1">
+                ${item.course}
+              </p>
+
+              <p class="text-xs sm:text-sm text-apple-muted mt-3 line-clamp-3 leading-relaxed">
+                ${item.description}
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-black/[0.05] dark:border-white/[0.06]">
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                ${toolPills}
+              </div>
+
+              <div class="flex items-center justify-between text-xs font-semibold text-apple-blue dark:text-apple-blueLight">
+                <span>Ver informe y metodología</span>
+                <i class="fa-solid fa-chevron-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        if (btn.getAttribute("data-category") === cat) {
+          btn.className = "filter-btn px-3.5 py-2 rounded-xl font-semibold transition-all bg-white dark:bg-apple-darkCard text-apple-text dark:text-white shadow-sm whitespace-nowrap";
+        } else {
+          btn.className = "filter-btn px-3.5 py-2 rounded-xl font-medium text-apple-muted hover:text-apple-text dark:hover:text-white transition-all whitespace-nowrap";
+        }
+      });
+      renderProjects();
+    }
+
+    function filterProjects() {
+      renderProjects();
+    }
+
+    // 3. MODAL DE DETALLE
+    function openProjectModal(id) {
+      const item = projects.find(p => p.id === id);
+      if (!item) return;
+      activeModalProjectId = id;
+
+      const catLabels = {
+        'herramientas': 'Herramientas & Código',
+        'suelos-cultivos': 'Cultivos & Suelos',
+        'agroindustria': 'Agroindustria & Calidad',
+        'estadistica': 'Estadística & SIG'
+      };
+
+      document.getElementById("modalCategory").textContent = catLabels[item.category] || 'Académico UdeC';
+      document.getElementById("modalTitle").textContent = item.title;
+      document.getElementById("modalCourse").textContent = `${item.course} • Universidad de Concepción`;
+      document.getElementById("modalObjective").textContent = item.objective || item.description;
+      document.getElementById("modalMethodology").textContent = item.methodology;
+      document.getElementById("modalResults").textContent = item.results;
+      document.getElementById("modalDate").textContent = item.date;
+
+      document.getElementById("modalTools").innerHTML = (item.tools || []).map(t =>
+        `<span class="px-3 py-1 text-xs rounded-full font-medium bg-apple-bg dark:bg-apple-darkElevated text-apple-text dark:text-stone-200">${t}</span>`
+      ).join("");
+
+      const modal = document.getElementById("projectDetailModal");
+      modal.classList.remove("hidden");
+      setTimeout(() => modal.classList.remove("opacity-0"), 10);
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById("projectDetailModal");
+      modal.classList.add("opacity-0");
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }, 200);
+      activeModalProjectId = null;
+    }
+
+    function copyCurrentProjectLink() {
+      if (!activeModalProjectId) return;
+      const item = projects.find(p => p.id === activeModalProjectId);
+      if (item) {
+        const text = `${item.title} (${item.course}) — José Tomás Herrera Klarian, Agronomía UdeC. ${window.location.href}`;
+        copyToClipboard(text, "Referencia copiada al portapapeles");
+      }
+    }
+
+    // 4. MODAL NUEVO TRABAJO
+    function openNewProjectModal() {
+      const modal = document.getElementById("newProjectModal");
+      modal.classList.remove("hidden");
+      setTimeout(() => modal.classList.remove("opacity-0"), 10);
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeNewProjectModal() {
+      const modal = document.getElementById("newProjectModal");
+      modal.classList.add("opacity-0");
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }, 200);
+      document.getElementById("newProjectForm").reset();
+    }
+
+    function handleNewProjectSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById("newTitle").value.trim();
+      const course = document.getElementById("newCourse").value.trim();
+      const category = document.getElementById("newCategory").value;
+      const date = document.getElementById("newDate").value.trim();
+      const toolsRaw = document.getElementById("newTools").value.trim();
+      const description = document.getElementById("newDescription").value.trim();
+      const methodology = document.getElementById("newMethodology").value.trim();
+
+      const tools = toolsRaw ? toolsRaw.split(",").map(t => t.trim()).filter(Boolean) : ["Agronomía UdeC"];
+
+      projects.unshift({
+        id: "proj-" + Date.now(),
+        title,
+        course,
+        category,
+        date,
+        description,
+        objective: description,
+        methodology,
+        results: "Trabajo documentado y validado para el portafolio académico UdeC.",
+        tools
+      });
+
+      saveProjects();
+      renderProjects();
+      closeNewProjectModal();
+      showToast("Trabajo agregado al portafolio", "fa-circle-check");
+    }
+
+    // 5. MODAL GITHUB PAGES
+    function openGhPagesModal() {
+      const modal = document.getElementById("ghPagesModal");
+      modal.classList.remove("hidden");
+      setTimeout(() => modal.classList.remove("opacity-0"), 10);
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeGhPagesModal() {
+      const modal = document.getElementById("ghPagesModal");
+      modal.classList.add("opacity-0");
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }, 200);
+    }
+
+    function updateGhUrlPreview() {
+      const raw = document.getElementById("ghUsernameInput").value.trim() || "jtherreraklarian";
+      const clean = raw.replace(/[^a-zA-Z0-9-]/g, "");
+      document.getElementById("ghUrlPreview").textContent = `https://${clean}.github.io/portafolio-udec/`;
+    }
+
+    function copyGeneratedGhUrl() {
+      const url = document.getElementById("ghUrlPreview").textContent;
+      copyToClipboard(url, "URL de GitHub Pages copiada");
+    }
+
+    // 6. COPIADO AL PORTAPAPELES Y NOTIFICACIÓN APPLE PILL
+    function copyToClipboard(text, msg) {
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      temp.style.position = "fixed";
+      temp.style.left = "-9999px";
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand("copy");
+        showToast(msg || "Copiado al portapapeles", "fa-circle-check");
+      } catch (e) {
+        showToast("No se pudo copiar automáticamente", "fa-circle-exclamation");
+      }
+      document.body.removeChild(temp);
+    }
+
+    function copyPortfolioLink() {
+      copyToClipboard(window.location.href, "Enlace del portafolio copiado");
+    }
+
+    let toastTimer;
+    function showToast(message, icon = "fa-circle-check") {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastMsg").textContent = message;
+      document.getElementById("toastIcon").className = `fa-solid ${icon} text-apple-blueLight dark:text-apple-blue text-sm`;
+
+      clearTimeout(toastTimer);
+      toast.classList.remove("-translate-y-12", "opacity-0", "pointer-events-none");
+      toast.classList.add("translate-y-0", "opacity-100");
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("translate-y-0", "opacity-100");
+        toast.classList.add("-translate-y-12", "opacity-0", "pointer-events-none");
+      }, 3000);
+    }
+
+    // 7. CONTACTO Y TEMA CLARO/OSCURO (FORZANDO LIGHT MODE BLANCO/AZUL POR DEFECTO)
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("contactName").value.trim();
+      showToast(`Mensaje enviado. Gracias, ${name}.`, "fa-paper-plane");
+      document.getElementById("contactForm").reset();
+    }
+
+    function initTheme() {
+      const saved = localStorage.getItem("apple_agro_theme");
+      // Por defecto inicia en el modo Blanco & Azul estilo Apple que pidió el usuario
+      const isDark = saved === "dark";
+      applyTheme(isDark);
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      applyTheme(!isDark);
+    }
+
+    function applyTheme(isDark) {
+      const icon = document.getElementById("themeIcon");
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+        icon.className = "fa-solid fa-sun text-amber-400 text-xs";
+        localStorage.setItem("apple_agro_theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        icon.className = "fa-solid fa-moon text-apple-text text-xs";
+        localStorage.setItem("apple_agro_theme", "light");
+      }
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById("mobileMenu");
+      const icon = document.getElementById("mobileMenuIcon");
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+        icon.className = "fa-solid fa-xmark text-xs";
+      } else {
+        menu.classList.add("hidden");
+        icon.className = "fa-solid fa-bars text-xs";
+      }
+    }
+
+    window.onload = function () {
+      initTheme();
+      loadProjects();
+      renderProjects();
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeProjectModal();
+          closeNewProjectModal();
+          closeGhPagesModal();
+        }
+      });
+    };
+  </script>
+</body>
+</html>
